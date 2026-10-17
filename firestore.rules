@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    match /users/{uid} {
+      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      allow create: if isSignedIn()
+                    && request.auth.uid == uid
+                    && request.resource.data.role == 'user';
+      allow update: if isSignedIn()
+                    && request.auth.uid == uid
+                    && request.resource.data.role == resource.data.role;
+      allow delete: if false;
+    }
+
+    match /incidents/{incidentId} {
+      allow read: if isSignedIn()
+                  && (resource.data.userId == request.auth.uid || isAdmin());
+
+      allow create: if isSignedIn()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status == 'initiated'
+        && request.resource.data.emergencyType in ['police','women','child','fire','ambulance']
+        && request.resource.data.triggerSource in ['button','voice']
+        && request.resource.data.liveKitRoomName == 'sos_' + incidentId
+        && request.resource.data.createdAt == request.time;
+
+      // The owner may only update location, updatedAt, or cancel, and only
+      // while the incident is still active.
+      allow update: if isSignedIn()
+        && resource.data.userId == request.auth.uid
+        && resource.data.status in ['initiated','alert_sent','responder_notified','responder_assigned','in_progress']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastLocation','updatedAt','status'])
+        && (request.resource.data.status == resource.data.status
+            || request.resource.data.status == 'cancelled');
+
+      // Temporary: admins can update anything. Phase 7 moves assignment and
+      // resolution into trusted Cloud Functions.
+      allow update: if isAdmin();
+
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
