@@ -1,0 +1,31 @@
+﻿# Secrets (never commit)
+.env
+*.env.local
+serviceAccountKey*.json
+*-adminsdk-*.json
+functions/.env
+functions/.runtimeconfig.json
+
+# Node
+node_modules/
+
+# Flutter / Android
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/android/key.properties
+*.jks
+*.keystore
+
+# Firebase
+.firebase/
+*-debug.log
+firebase-debug.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
