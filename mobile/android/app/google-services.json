@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882340860670",
+    "project_id": "smartsos-debff",
+    "storage_bucket": "smartsos-debff.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882340860670:android:ec2b232ee7c08fe5600baf",
+        "android_client_info": {
+          "package_name": "com.smartsos.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882340860670-ltj6mhngi9ap7ocebn2rbo3veir60qjn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS5GrfxNpGU06Li8hM1mPIx6_81wf85_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882340860670-ltj6mhngi9ap7ocebn2rbo3veir60qjn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
