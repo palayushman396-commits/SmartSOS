@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartSOS Admin – Login</title>
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <h1>SmartSOS</h1>
+    <p class="subtitle">Admin &amp; Responder Console</p>
+
+    <form id="login-form" novalidate>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required />
+
+      <p id="error" class="error" role="alert" hidden></p>
+      <button id="submit" type="submit">Log in</button>
+    </form>
+  </main>
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>
